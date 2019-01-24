@@ -42,10 +42,8 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.most_items(3)).to eq([@m_3, @m_2, @m])
     end
     it '.revenue_by_date' do
-      # return total revenue if not passed a date in params
       expect(Merchant.revenue_by_date(2.days.ago)).to eq(19)
       expect(Merchant.revenue_by_date(1.days.ago)).to eq(4)
-      expect(Merchant.revenue_by_date).to eq(23)
     end
   end
 end
