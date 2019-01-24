@@ -27,7 +27,7 @@ RSpec.describe Merchant, type: :model do
       ii_2 = create(:invoice_item, item: item, invoice: i_2, quantity: 2, unit_price: 12)
       t_2 = create(:failed_transaction, invoice: i_2)
 
-      expect(Merchant.most_revenue(2)).to eq([m_2, m_1])
+      expect(Merchant.most_revenue(2)).to eq([m_2, m])
     end
   end
 end
