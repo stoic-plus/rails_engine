@@ -62,7 +62,7 @@ RSpec.describe Merchant, type: :model do
       t_3 = create(:transaction, invoice: i_3, result: 'success')
 
       expect(Merchant.most_items(2)).to eq([m_3, m_2])
-      expect(Merchant.most_items(3)).to eq([m_3, m_2, m_1])
+      expect(Merchant.most_items(3)).to eq([m_3, m_2, m])
     end
   end
 end
