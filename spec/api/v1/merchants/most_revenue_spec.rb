@@ -30,26 +30,26 @@ describe 'Merchants - Most Revenue' do
 
     expect(response).to be_successful
 
-    top_merch_api = JSON.parse(response.body)
+    top_merch_api = JSON.parse(response.body)["data"]
     expect(top_merch_api.count).to eq(2)
     top_merch = [@m_2, @m]
 
     top_merch_api.each_with_index do |m, index|
-      expect(top_merch[index].id).to eq(m.id)
-      expect(top_merch[index].name).to eq(m.name)
+      expect(top_merch[index].id).to eq(m["attributes"]["id"])
+      expect(top_merch[index].name).to eq(m["attributes"]["name"])
     end
 
     get '/api/v1/merchants/most_revenue?quantity=3'
 
     expect(response).to be_successful
 
-    top_merch_api = JSON.parse(response.body)
+    top_merch_api = JSON.parse(response.body)["data"]
     expect(top_merch_api.count).to eq(3)
     top_merch = [@m_2, @m, @m_3]
 
     top_merch_api.each_with_index do |m, index|
-      expect(top_merch[index].id).to eq(m.id)
-      expect(top_merch[index].name).to eq(m.name)
+      expect(top_merch[index].id).to eq(m["attributes"]["id"])
+      expect(top_merch[index].name).to eq(m["attributes"]["name"])
     end
   end
 end
