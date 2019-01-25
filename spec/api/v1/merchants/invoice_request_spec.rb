@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Merchants - Invoice Request' do
+describe 'Merchant - Invoices Request' do
   it 'sends a list of invoices for this merchant' do
     c = create(:customer)
     m = create(:merchant)

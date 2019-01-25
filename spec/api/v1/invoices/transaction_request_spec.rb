@@ -4,6 +4,7 @@ describe 'Invoice - Transactions Request' do
   it 'returns a list of transactions for this invoice' do
     c = create(:customer)
     m = create(:merchant)
+
     invoice = create(:invoice, customer: c, merchant: m)
     ft = create(:failed_transaction, invoice: invoice)
     t = create(:transaction, invoice: invoice)
@@ -16,13 +17,13 @@ describe 'Invoice - Transactions Request' do
 
     expect(response).to be_successful
 
-    transactions = JSON.parse(response.body)
+    transactions = JSON.parse(response.body)["data"]
     expect(transactions.count).to eq(2)
     invoice.transactions.each_with_index do |tran, i|
       expect(transactions[i]["attributes"]["id"]).to eq(tran.id)
       expect(transactions[i]["attributes"]["invoice_id"]).to eq(tran.invoice_id)
       expect(transactions[i]["attributes"]["credit_card_number"]).to eq(tran.credit_card_number)
-      expect(transactions[i]["attributes"]["credit_card_expiration_date"]).to eq(tran.credit_card_expiration_date)
+      expect(DateTime.parse(transactions[i]["attributes"]["credit_card_expiration_date"])).to eq(DateTime.parse(tran.credit_card_expiration_date.to_s))
       expect(transactions[i]["attributes"]["result"]).to eq(tran.result)
     end
   end
