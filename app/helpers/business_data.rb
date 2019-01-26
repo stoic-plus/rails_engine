@@ -12,7 +12,7 @@ module BusinessData
   class TotalRevenue
     @@count = 0
     attr_reader :total_revenue, :id
-    def initialize(total_revenue, date)
+    def initialize(total_revenue)
       @id = @@count
       @@count += 1
       @total_revenue = total_revenue
