@@ -29,8 +29,8 @@ RSpec.describe Invoice, type: :model do
     end
 
     it '.revenue_by_date' do
-      expect(Invoice.revenue_by_date(2.days.ago)).to eq(19)
-      expect(Invoice.revenue_by_date(1.days.ago)).to eq(4)
+      expect(Invoice.total_revenue_by_date(2.days.ago)).to eq(19)
+      expect(Invoice.total_revenue_by_date(1.days.ago)).to eq(4)
     end
   end
 end
