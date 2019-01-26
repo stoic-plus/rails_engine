@@ -32,9 +32,5 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.total_revenue_by_date(2.days.ago)).to eq(19)
       expect(Invoice.total_revenue_by_date(1.days.ago)).to eq(8)
     end
-    it 'top_items_by_revenue' do
-      expect(Invoice.top_items_by_revenue(2)).to eq([@item_2, @item_3])
-      expect(Invoice.top_items_by_revenue(3)).to eq([@item_2, @item_3, @item])
-    end
   end
 end
