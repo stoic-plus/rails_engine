@@ -27,5 +27,6 @@ describe 'Merchant - Favorite Customer' do
     expect(json["attributes"]["id"]).to eq(c_2.id)
     expect(json["attributes"]["first_name"]).to eq(c_2.first_name)
     expect(json["attributes"]["last_name"]).to eq(c_2.last_name)
+    expect(json["attributes"]["transaction_count"]).to eq(2)
   end
 end
