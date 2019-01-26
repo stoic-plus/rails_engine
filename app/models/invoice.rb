@@ -11,8 +11,15 @@ class Invoice < ApplicationRecord
      .select("SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
      .where("transactions.result = ? AND DATE_TRUNC('day', invoices.updated_at) = ?", 'success', date_time.to_date)
      .group("DATE_TRUNC('day', invoices.updated_at)")
-     
+
      return nil if total_rev.empty?
      return total_rev[0].revenue
+  end
+
+  def self.total_revenue
+    joins(:invoice_items, :transactions)
+     .select("SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
+     .where("transactions.result = ?", 'success')[0]
+     .revenue
   end
 end
