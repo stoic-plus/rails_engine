@@ -12,6 +12,7 @@ describe 'Items - Most Revenue' do
     ii_1 = create(:invoice_item, invoice: inv, item: item_1, quantity: 1, unit_price: 5)
     ii_2 = create(:invoice_item, invoice: inv, item: item_2, quantity: 1, unit_price: 10)
     ii_3 = create(:invoice_item, invoice: inv, item: item_3, quantity: 1, unit_price: 15)
+    create(:transaction, invoice: inv)
 
     get '/api/v1/items/most_revenue?quantity=2'
 
@@ -24,9 +25,9 @@ describe 'Items - Most Revenue' do
     top_items_api.each_with_index do |item, i|
       expect(top_items[i].id).to eq(item["attributes"]["id"])
       expect(top_items[i].name).to eq(item["attributes"]["name"])
-      expect(top_items[i].name).to eq(item["attributes"]["description"])
-      expect(top_items[i].name).to eq(item["attributes"]["unit_price"])
-      expect(top_items[i].name).to eq(item["attributes"]["merchant_id"])
+      expect(top_items[i].description).to eq(item["attributes"]["description"])
+      expect(top_items[i].unit_price).to eq(item["attributes"]["unit_price"])
+      expect(top_items[i].merchant_id).to eq(item["attributes"]["merchant_id"])
     end
 
     get '/api/v1/items/most_revenue?quantity=3'
@@ -40,9 +41,9 @@ describe 'Items - Most Revenue' do
     top_items_api.each_with_index do |item, i|
       expect(top_items[i].id).to eq(item["attributes"]["id"])
       expect(top_items[i].name).to eq(item["attributes"]["name"])
-      expect(top_items[i].name).to eq(item["attributes"]["description"])
-      expect(top_items[i].name).to eq(item["attributes"]["unit_price"])
-      expect(top_items[i].name).to eq(item["attributes"]["merchant_id"])
+      expect(top_items[i].description).to eq(item["attributes"]["description"])
+      expect(top_items[i].unit_price).to eq(item["attributes"]["unit_price"])
+      expect(top_items[i].merchant_id).to eq(item["attributes"]["merchant_id"])
     end
   end
 end
