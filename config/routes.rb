@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       end
       namespace :items do
         get '/most_revenue', to: "most_revenue#index", as: "most_revenue"
+        get '/most_items', to: "most_items#index", as: "most_items"
       end
     end
   end
