@@ -1,21 +1,30 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :merchants, only: [:index, :show]
       namespace :merchants do
         get '/:id/items', to: "items#index", as: "items"
         get '/:id/invoices', to: "invoices#index", as: "invoices"
         get '/revenue', to: "revenues#index", as: "revenues"
         get '/:id/revenue', to: "revenues#show", as: "revenue"
+        get '/:id/favorite_customer', to: "favorite_customer#index", as: "favorite_customer"
         get '/most_revenue', to: "most_revenue#index", as: "most_revenue"
         get '/most_items', to: "most_items#index", as: "most_items"
       end
+      resources :merchants, only: [:index, :show]
       namespace :invoices do
         get '/:id/transactions', to: "transactions#index", as: "transactions"
         get ":id/invoice_items", to: "invoice_items#index", as: "invoice_items"
         get ":id/items", to: "items#index", as: "items"
         get ":id/customer", to: "customer#index", as: "customer"
         get ":id/merchant", to: "merchant#index", as: "merchant"
+      end
+      namespace :items do
+        get '/most_revenue', to: "most_revenue#index", as: "most_revenue"
+        get '/most_items', to: "most_items#index", as: "most_items"
+        get '/:id/best_day', to: "best_day#index", as: "best_day"
+      end
+      namespace :customers do
+        get '/:id/favorite_merchant', to: "favorite_merchant#index", as: "favorite_merchant"
       end
     end
   end
