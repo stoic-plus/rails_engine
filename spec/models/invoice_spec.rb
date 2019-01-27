@@ -51,8 +51,10 @@ RSpec.describe Invoice, type: :model do
       inv_3 = create(:invoice, customer: c, merchant: m, updated_at: day_1_ago)
       ii_3 = create(:invoice_item, invoice: inv_3, item: item_1, quantity: 6)
       create(:transaction, invoice: inv_3)
-      
-      expect(Invoice.best_day_for(item_1.id).to_date).to eq(day_1_ago.to_date)
+
+      best_day = Invoice.best_day_for(item_1.id)
+      expect(best_day.day.to_date).to eq(day_1_ago.to_date)
+      expect(best_day.quantity_sold).to eq(6)
     end
   end
 end
