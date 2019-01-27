@@ -3,9 +3,9 @@ require 'rails_helper'
 describe 'Customer - Favorite Merchant' do
   it 'returns merchant where customer has most successful transactions' do
     c_1 = create(:customer)
+    c_2 = create(:customer)
     m = create(:merchant)
     m_2 = create(:merchant)
-    m_3 = create(:merchant)
 
     i = create(:invoice, customer: c_1, merchant: m, updated_at: 2.days.ago)
     t = create(:transaction, invoice: i, result: 'success')
@@ -27,9 +27,9 @@ describe 'Customer - Favorite Merchant' do
     expect(json["type"]).to eq("merchant")
     expect(json["attributes"]["id"]).to eq(m.id)
     expect(json["attributes"]["name"]).to eq(m.name)
-    expect(json["attributes"]["transaction_count"]).to eq(2)
+    # expect(json["attributes"]["transaction_count"]).to eq(2)
 
-    get "/api/v1/merchants/#{m_3.id}/favorite_customer"
+    get "/api/v1/customers/#{c_2.id}/favorite_merchant"
 
     expect(response).to be_successful
     json = JSON.parse(response.body)["data"]
