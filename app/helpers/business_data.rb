@@ -20,12 +20,12 @@ module BusinessData
   end
   class BestDay
     @@count = 0
-    attr_reader :quantity_sold, :day, :id
-    def initialize(total_revenue, day)
+    attr_reader :quantity_sold, :date, :id
+    def initialize(best_day)
       @id = @@count
       @@count += 1
-      @quantity_sold = quantity_sold
-      @day = day
+      @quantity_sold = best_day.quantity_sold
+      @date = best_day.day
     end
   end
   class ApiError
