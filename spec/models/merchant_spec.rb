@@ -46,17 +46,17 @@ RSpec.describe Merchant, type: :model do
       m = create(:merchant)
       m_2 = create(:merchant)
 
-      create(:invoice, customer: c_1, merchant: m, updated_at: 2.days.ago)
-      create(:transaction, invoice: i, result: 'success')
+      inv_1 = create(:invoice, customer: c_1, merchant: m, updated_at: 2.days.ago)
+      create(:transaction, invoice: inv_1, result: 'success')
 
-      create(:invoice, customer: c_1, merchant: m, updated_at: 2.days.ago)
-      create(:failed_transaction, invoice: i_1)
+      inv_2 = create(:invoice, customer: c_1, merchant: m, updated_at: 2.days.ago)
+      create(:failed_transaction, invoice: inv_2)
 
-      create(:invoice, customer: c_2, merchant: m_2, updated_at: 2.days.ago)
-      create(:transaction, invoice: i_2, result: 'success')
+      inv_3 = create(:invoice, customer: c_1, merchant: m_2, updated_at: 2.days.ago)
+      create(:transaction, invoice: inv_3, result: 'success')
 
-      create(:invoice, customer: c_2, merchant: m_2, updated_at: 1.days.ago)
-      create(:transaction, invoice: i_3, result: 'success')
+      inv_4 = create(:invoice, customer: c_1, merchant: m_2, updated_at: 1.days.ago)
+      create(:transaction, invoice: inv_4, result: 'success')
 
       expect(Merchant.favorite_merchant_for(c_1.id)).to eq(m_2)
     end
