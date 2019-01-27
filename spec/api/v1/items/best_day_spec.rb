@@ -27,7 +27,7 @@ describe 'Items - Best Day' do
 
     json = JSON.parse(response.body)["data"]
 
-    expect(json["attributes"]["date"]).to eq(day_1_ago)
-    expect(json["attributes"]["total_sales"]).to eq(6)
+    expect(json["attributes"]["date"].to_date).to eq(day_1_ago.to_date)
+    expect(json["attributes"]["quantity_sold"]).to eq(6)
   end
 end
