@@ -18,6 +18,16 @@ module BusinessData
       @total_revenue = total_revenue
     end
   end
+  class BestDay
+    @@count = 0
+    attr_reader :quantity_sold, :day, :id
+    def initialize(total_revenue, day)
+      @id = @@count
+      @@count += 1
+      @quantity_sold = quantity_sold
+      @day = day
+    end
+  end
   class ApiError
     @@count = 0
     attr_reader :message, :date, :id
