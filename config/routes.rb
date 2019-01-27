@@ -23,6 +23,9 @@ Rails.application.routes.draw do
         get '/most_items', to: "most_items#index", as: "most_items"
         get '/:id/best_day', to: "best_day#index", as: "best_day"
       end
+      namespace :customers do
+        get '/:id/favorite_merchant', to: "favorite_merchant#index", as: "favorite_merchant"
+      end
     end
   end
 end
