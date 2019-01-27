@@ -22,4 +22,5 @@ class Item < ApplicationRecord
     .order("quantity_sold DESC")
     .limit(num)
   end
+
 end

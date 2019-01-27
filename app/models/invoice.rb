@@ -22,4 +22,13 @@ class Invoice < ApplicationRecord
      .where("transactions.result = ?", 'success')[0]
      .revenue
   end
+
+  def self.best_day_for(item_id)
+    joins(:invoice_items, :transactions)
+      .select("DATE_TRUNC('day', invoices.updated_at) AS day")
+      .where({invoice_items: {item_id: item_id}, transactions: {result: 'success'}})
+      .group("DATE_TRUNC('day', invoices.updated_at)")
+      .order("SUM(invoice_items.quantity) DESC, DATE_TRUNC('day', invoices.updated_at) DESC")
+      .limit(1)[0].day
+  end
 end
