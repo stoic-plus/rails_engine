@@ -22,11 +22,15 @@ Rails.application.routes.draw do
         get ":id/merchant", to: "merchant#index", as: "merchant"
       end
       namespace :items do
+        get '/find_all', to: "search#index", as: "find_all"
+        get '/find', to: "search#show", as: "find"
         get '/most_revenue', to: "most_revenue#index", as: "most_revenue"
         get '/most_items', to: "most_items#index", as: "most_items"
         get '/:id/best_day', to: "best_day#index", as: "best_day"
       end
       namespace :customers do
+        get '/find_all', to: "search#index", as: "find_all"
+        get '/find', to: "search#show", as: "find"
         get '/:id/favorite_merchant', to: "favorite_merchant#index", as: "favorite_merchant"
       end
     end
