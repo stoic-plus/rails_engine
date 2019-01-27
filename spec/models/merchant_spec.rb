@@ -41,5 +41,24 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.most_items(2)).to eq([@m_3, @m_2])
       expect(Merchant.most_items(3)).to eq([@m_3, @m_2, @m])
     end
+    it '.favorite_merchant_for' do
+      c_1 = create(:customer)
+      m = create(:merchant)
+      m_2 = create(:merchant)
+
+      create(:invoice, customer: c_1, merchant: m, updated_at: 2.days.ago)
+      create(:transaction, invoice: i, result: 'success')
+
+      create(:invoice, customer: c_1, merchant: m, updated_at: 2.days.ago)
+      create(:failed_transaction, invoice: i_1)
+
+      create(:invoice, customer: c_2, merchant: m_2, updated_at: 2.days.ago)
+      create(:transaction, invoice: i_2, result: 'success')
+
+      create(:invoice, customer: c_2, merchant: m_2, updated_at: 1.days.ago)
+      create(:transaction, invoice: i_3, result: 'success')
+
+      expect(Merchant.favorite_merchant_for(c_1.id)).to eq(m_2)
+    end
   end
 end
