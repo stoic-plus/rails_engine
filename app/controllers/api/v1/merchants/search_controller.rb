@@ -7,9 +7,8 @@ class Api::V1::Merchants::SearchController < ApplicationController
 
   def show
     merchant = Merchant.find_by(merchant_params)
-    binding.pry
-    render_error if merchant.empty?
-    render json: MerchantSerializer.new(merchant) unless merchant.empty?
+    render_error unless merchant
+    render json: MerchantSerializer.new(merchant) if merchant
   end
 
   private
@@ -19,7 +18,6 @@ class Api::V1::Merchants::SearchController < ApplicationController
   end
 
   def render_error
-    binding.pry
     render json: ApiErrorSerializer.new(BusinessData::ApiError.new("No records found with those params", DateTime.now))
   end
 end
