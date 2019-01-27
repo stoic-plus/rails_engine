@@ -32,5 +32,27 @@ RSpec.describe Invoice, type: :model do
       expect(Invoice.total_revenue_by_date(2.days.ago)).to eq(19)
       expect(Invoice.total_revenue_by_date(1.days.ago)).to eq(8)
     end
+    it '.best_day_for' do
+      c = create(:customer)
+      m = create(:merchant)
+      item_1 = create(:item, merchant: m)
+      days_3_ago = 3.days.ago
+      days_2_ago = 2.days.ago
+      day_1_ago = 1.days.ago
+
+      inv_1 = create(:invoice, customer: c, merchant: m, updated_at: days_3_ago)
+      ii_1 = create(:invoice_item, invoice: inv_1, item: item_1, quantity: 5)
+      create(:transaction, invoice: inv_1)
+
+      inv_2 = create(:invoice, customer: c, merchant: m, updated_at: days_2_ago)
+      ii_2 = create(:invoice_item, invoice: inv_2, item: item_1, quantity: 6)
+      create(:transaction, invoice: inv_2)
+
+      inv_3 = create(:invoice, customer: c, merchant: m, updated_at: day_1_ago)
+      ii_3 = create(:invoice_item, invoice: inv_3, item: item_1, quantity: 6)
+      create(:transaction, invoice: inv_3)
+      
+      expect(Invoice.best_day_for(item_1.id).to_date).to eq(day_1_ago.to_date)
+    end
   end
 end
