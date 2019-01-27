@@ -9,9 +9,9 @@ describe 'Items - Most Items (Sold)' do
     item_3 = create(:item, merchant: m)
 
     inv = create(:invoice, customer: c, merchant: m)
-    ii_1 = create(:invoice_item, invoice: inv, item: item_1, quantity: 3, unit_price: 5)
-    ii_2 = create(:invoice_item, invoice: inv, item: item_2, quantity: 2, unit_price: 10)
-    ii_3 = create(:invoice_item, invoice: inv, item: item_3, quantity: 1, unit_price: 15)
+    ii_1 = create(:invoice_item, invoice: inv, item: item_1, quantity: 6)
+    ii_2 = create(:invoice_item, invoice: inv, item: item_2, quantity: 3)
+    ii_3 = create(:invoice_item, invoice: inv, item: item_3, quantity: 1)
     create(:transaction, invoice: inv)
 
     get '/api/v1/items/most_items?quantity=2'
