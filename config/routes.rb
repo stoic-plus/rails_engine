@@ -27,6 +27,8 @@ Rails.application.routes.draw do
         get '/most_revenue', to: "most_revenue#index", as: "most_revenue"
         get '/most_items', to: "most_items#index", as: "most_items"
         get '/:id/best_day', to: "best_day#index", as: "best_day"
+        get '/:id/invoice_items', to: "invoice_items#index", as: "invoice_items"
+        get '/:id/merchant', to: "merchant#index", as: "merchant"
       end
       namespace :customers do
         get '/find_all', to: "search#index", as: "find_all"
