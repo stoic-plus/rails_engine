@@ -33,6 +33,10 @@ Rails.application.routes.draw do
         get '/find', to: "search#show", as: "find"
         get '/:id/favorite_merchant', to: "favorite_merchant#index", as: "favorite_merchant"
       end
+      namespace :transactions do
+        get '/find_all', to: "search#index", as: "find_all"
+        get '/find', to: "search#show", as: "find"
+      end
     end
   end
 end
