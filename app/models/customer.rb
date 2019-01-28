@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
   has_many :invoices
+  has_many :transactions, through: :invoices
 
   def self.favorite_customer_for(merchant_id)
     joins(invoices: [:transactions])

@@ -27,15 +27,24 @@ Rails.application.routes.draw do
         get '/most_revenue', to: "most_revenue#index", as: "most_revenue"
         get '/most_items', to: "most_items#index", as: "most_items"
         get '/:id/best_day', to: "best_day#index", as: "best_day"
+        get '/:id/invoice_items', to: "invoice_items#index", as: "invoice_items"
+        get '/:id/merchant', to: "merchant#index", as: "merchant"
       end
       namespace :customers do
         get '/find_all', to: "search#index", as: "find_all"
         get '/find', to: "search#show", as: "find"
         get '/:id/favorite_merchant', to: "favorite_merchant#index", as: "favorite_merchant"
+        get '/:id/invoices', to: "invoices#index", as: "invoices"
+        get '/:id/transactions', to: "transactions#index", as: "transactions"
       end
       namespace :transactions do
         get '/find_all', to: "search#index", as: "find_all"
         get '/find', to: "search#show", as: "find"
+        get '/:id/invoice', to: "invoice#index", as: "invoice"
+      end
+      namespace :invoice_items do
+        get '/:id/invoice', to: "invoice#index", as: "invoice"
+        get '/:id/item', to: "item#index", as: "item"
       end
     end
   end
