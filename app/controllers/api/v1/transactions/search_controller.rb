@@ -1,6 +1,6 @@
 class Api::V1::Transactions::SearchController < ApplicationController
   def index
-    transactions = Transaction.where(merchant_params)
+    transactions = Transaction.where(transaction_params)
     render_error if transactions.empty?
     render json: TransactionSerializer.new(transactions) unless transactions.empty?
   end
