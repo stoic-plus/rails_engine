@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/merchants.json', to: "merchants#index", as: "merchants"
       get '/customers.json', to: "customers#index", as: "customers"
+      get '/invoices.json', to: "invoices#index", as: "invoices"
+      get '/items.json', to: "items#index", as: "items"
       namespace :merchants do
         get '/find_all', to: "search#index", as: "find_all"
         get '/find', to: "search#show", as: "find"
